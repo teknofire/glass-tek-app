@@ -15,7 +15,7 @@ TekApp::Application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  get 'login', to: redirect('/auth/google_oauth2')
+  get 'login', to: redirect('/auth/google')
   get 'logout', to: 'sessions#destroy'
   
   get '/auth/failure', to: 'sessions#failure'

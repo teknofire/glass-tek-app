@@ -9,6 +9,7 @@ gem 'haml'
 gem 'bower-rails'
 gem 'omniauth'
 gem "omniauth-google-oauth2"
+gem 'google-api-client'
 gem 'quiet_assets'
 
 # Use SCSS for stylesheets
