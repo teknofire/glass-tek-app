@@ -1,4 +1,8 @@
 TekApp::Application.routes.draw do
+  resources :users
+
+  resources :sessions
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,6 +14,12 @@ TekApp::Application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+
+  get 'login', to: redirect('/auth/google_oauth2')
+  get 'logout', to: 'sessions#destroy'
+  
+  get '/auth/failure', to: 'sessions#failure'
+  post '/auth/:provider/callback', to: 'sessions#create'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
