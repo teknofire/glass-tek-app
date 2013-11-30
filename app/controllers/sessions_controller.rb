@@ -7,8 +7,11 @@ class SessionsController < ApplicationController
       # whether there is already a user signed in.
       @auth = Authorization.create_from_hash(auth_hash, current_user)
     end
+    
     # Log the authorizing user in.
     self.current_user = @auth.user
+    
+    current_user.update_credentials(auth_hash)
     
     flash[:success] = 'Logged in succesfully'
     redirect_back_or_default('/')

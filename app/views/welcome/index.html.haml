@@ -1,4 +1,8 @@
-%h1 
+%h2
   Welcome
-  = current_user.name if signed_in?
-  = current_user.attributes.inspect
+  
+.panel.panel-warning
+  .panel-body
+    - if signed_in?
+      = current_user.name
+      = current_user.attributes.inspect
