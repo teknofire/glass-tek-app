@@ -4,7 +4,7 @@ class MirrorAPI
   
   def initialize(user)
     @user = user
-    self.class.headers( { "Authorization" => @user.token } )
+    self.class.params( { "access_token" => @user.token } )
   end
   
   def timeline
