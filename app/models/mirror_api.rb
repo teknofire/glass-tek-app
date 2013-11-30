@@ -10,4 +10,8 @@ class MirrorAPI
   def timeline
     self.class.get("/mirror/v1/timeline")
   end
+  
+  def locations
+    self.class.get("/mirror/v1/locations")
+  end
 end
