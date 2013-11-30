@@ -3,7 +3,6 @@ class MirrorAPI
   base_uri 'www.googleapis.com'
   
   def initialize(user)
-    super
     @user = user
   end
   
