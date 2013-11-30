@@ -19,6 +19,7 @@ TekApp::Application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   
   get '/auth/failure', to: 'sessions#failure'
+  get '/auth/:provider/callback', to: 'sessions#create'
   post '/auth/:provider/callback', to: 'sessions#create'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
