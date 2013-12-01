@@ -4,6 +4,9 @@ end
 class NoGoogleApiTokenError < Exception
 end
 
+class InvalidRequestError < Exception
+end
+
 class MirrorApiObject
   include HTTParty
   base_uri 'www.googleapis.com:443'
@@ -23,7 +26,7 @@ class MirrorApiObject
     
     @response = get("#{path}?#{params.to_param}", options)
     
-    authorized?
+    valid_response?
     
     @response
   end
@@ -35,7 +38,7 @@ class MirrorApiObject
     
     @response = get("#{path}?#{params.to_param}", options)
     
-    authorized?
+    valid_response?
     
     @response
   end
@@ -48,13 +51,13 @@ class MirrorApiObject
     
     @response = post(path, options)
     
-    authorized?
+    valid_response?
     
     @response
   end
   
   def self.error
-    [@response.code, @response.message, @response.parsed_response['error']['errors']]
+    [@response.code, @response.message, @response.parsed_response['error']['errors'].collect { |e| e.message }.join(', ')]
   end
   
   def kind
@@ -67,9 +70,13 @@ class MirrorApiObject
   
   protected
   
-  
-  def self.authorized?
+  def self.valid_response?
     unauthorized! if @response.unauthorized?
+    invalid! if @response.bad_request?
+  end
+  
+  def self.invalid!
+    raise InvalidRequestError, error
   end
   
   def self.unauthorized!
