@@ -12,7 +12,10 @@ class WelcomeController < ApplicationController
     redirect_to '/'
   rescue NoGoogleApiTokenError => e
     flash[:warning] = "Could not find a valid mirror api token #{e}"
-    redirect_to '/'  
+    redirect_to '/'
+  rescue InvalidRequestError => e
+    flash[:warning] = "Error performing request, #{e.message}"
+    redirect_to '/'
   rescue NotAuthenticatedError
     flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
     redirect_to '/login'      
@@ -24,7 +27,7 @@ class WelcomeController < ApplicationController
     # @timeline = mirror_api.timeline
     @location = Location.find(current_user, 'latest')
   rescue NoGoogleApiTokenError => e
-    flash[:warning] = "Could not find a valid mirror api token #{e}"    
+    flash[:warning] = "Could not find a valid mirror api token #{e.message}"    
   rescue NotAuthenticatedError
     flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
     redirect_to '/login'
