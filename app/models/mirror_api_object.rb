@@ -55,8 +55,7 @@ class MirrorApiObject
     
     path = @default_path if path.nil?
     
-    options[:body] ||= {}
-    options[:body].merge!(content.to_json)
+    options[:body] = content.to_json
     options[:headers] ||= {}
     options[:headers].merge!({ 'Content-Type' => 'application/json' })
     
