@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
   def hello_self
     response = Timeline.create(current_user, 'hello self')
     
-    logger.info response.inspect
+    # logger.info response
     
     flash[:success] = 'Timeline entry sent'
     redirect_to '/'
