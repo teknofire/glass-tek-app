@@ -10,6 +10,10 @@ class LocationList < MirrorApiObject
     'mirror#locationsList'
   end
   
+  def all
+    @locations
+  end
+  
   def latest
     @locations.select { |l| l.id == 'latest' }.first
   end

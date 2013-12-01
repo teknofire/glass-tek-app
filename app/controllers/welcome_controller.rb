@@ -2,6 +2,7 @@ class WelcomeController < ApplicationController
   def index    
     if signed_in?
       begin
+        @timeline = mirror_api.timeline
         @locations = mirror_api.locations
         if !@locations
           flash[:danger] = "#{mirror_api.error[1]} - #{mirror_api.error[2].collect{|e| e['message'] }.join(', ')}"
