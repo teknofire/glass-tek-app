@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
     if signed_in? and current_user.token?
       begin
         @locations = mirror_api.try(:locations)
-      rescue NotImplementedError(e)
+      rescue NotImplementedError => e
         flash[:error] = "Error while trying to talk with the mirror api: #{e.error}"
         default_locations
       end
