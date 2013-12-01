@@ -20,7 +20,7 @@ class MirrorApiObject
     path = @default_path if path.nil?
     path += "/#{id}"
     
-    @response = self.class.get("#{path}?#{params.to_param}", options)
+    @response = get("#{path}?#{params.to_param}", options)
     
     authorized?
     
@@ -32,7 +32,7 @@ class MirrorApiObject
     
     path = @default_path if path.nil?
     
-    @response = self.class.get("#{path}?#{params.to_param}", options)
+    @response = get("#{path}?#{params.to_param}", options)
     
     authorized?
     
