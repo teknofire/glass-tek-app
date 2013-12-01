@@ -20,6 +20,5 @@ class @Map
     if fit
       # this is needed to handle issue with zooming to soon after initialization
       setTimeout =>
-        @map.panTo(object.getLatLng())
-        @map.setZoom(14)
+        @map.setView(object.getLatLng(), 15)
       , 100
