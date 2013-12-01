@@ -1,3 +1,6 @@
+class NotAuthenticatedError < Exception
+end
+
 class MirrorAPI
   include HTTParty
   base_uri 'www.googleapis.com:443'
@@ -5,6 +8,7 @@ class MirrorAPI
   def initialize(user)
     @user = user
     self.class.default_params( { "access_token" => @user.token } )
+    authenticate!
   end
   
   def timeline
@@ -13,7 +17,6 @@ class MirrorAPI
   
   def locations
     parse_response self.class.get("/mirror/v1/locations")
-    
   end
   
   def error
@@ -31,5 +34,15 @@ class MirrorAPI
     else
       raise NotImplementedError, "Unknown response kind #{@response['kind']}"
     end
+  end
+  
+  protected
+  
+  def authenticate!
+    raise NotAuthenticatedError if self.class.get("/mirror/v1/timeline").unauthorized?
+  end
+  
+  def valid_token?
+    @user.token?
   end
 end

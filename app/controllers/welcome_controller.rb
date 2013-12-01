@@ -1,17 +1,18 @@
 class WelcomeController < ApplicationController
   def index    
-    # if signed_in? and current_user.token?
+    if signed_in?
       begin
         @locations = mirror_api.locations
         if !@locations
           flash[:danger] = "#{mirror_api.error[1]} - #{mirror_api.error[2].collect{|e| e['message'] }.join(', ')}"
         end
+      rescue NotAuthenticatedError
+        redirect_to '/login'
       rescue NotImplementedError => e
         flash[:danger] = "Error while trying to talk with the mirror api: #{e.inspect}"
         default_locations
       end
-      
-    # end
+    end
     
     default_locations unless @locations
   end

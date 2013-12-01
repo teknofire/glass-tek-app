@@ -1,17 +1,21 @@
 %h2
   Welcome
-  
-#map
 
-:javascript
-  var map = new Map('map')
-  map.fromWKT('#{@locations.latest.wkt}');
+- unless signed_in?
+  = link_to '/login', class: 'btn btn-primary' do
+    Login
 
-- if signed_in?
+- if signed_in?  
+  #map
+
+  :javascript
+    var map = new Map('map')
+    map.fromWKT('#{@locations.latest.wkt}');
+
   .panel.panel-warning
     .panel-body
       = mirror_api.try(:timeline)
-      / = mirror_api.try(:locations)
+      = mirror_api.try(:locations)
 
       = current_user.name
       = current_user.attributes.inspect
