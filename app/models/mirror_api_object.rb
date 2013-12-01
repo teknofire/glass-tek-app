@@ -4,7 +4,8 @@ end
 class NoGoogleApiTokenError < Exception
 end
 
-class MirrorApiObject < HTTParty
+class MirrorApiObject
+  include HTTParty
   base_uri 'www.googleapis.com:443'
   
   def self.default_path(path = nil)
@@ -19,7 +20,7 @@ class MirrorApiObject < HTTParty
     path = @default_path if path.nil?
     path += "/#{id}"
     
-    @response = super("#{path}?#{params.to_param}", options)
+    @response = self.class.get("#{path}?#{params.to_param}", options)
     
     authorized?
     
@@ -31,7 +32,7 @@ class MirrorApiObject < HTTParty
     
     path = @default_path if path.nil?
     
-    @response = super("#{path}?#{params.to_param}", options)
+    @response = self.class.get("#{path}?#{params.to_param}", options)
     
     authorized?
     
