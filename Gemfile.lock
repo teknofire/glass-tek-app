@@ -46,6 +46,7 @@ GEM
     extlib (0.9.16)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    georuby (2.2.1)
     google-api-client (0.6.4)
       addressable (>= 2.3.2)
       autoparse (>= 0.3.3)
@@ -170,6 +171,7 @@ PLATFORMS
 DEPENDENCIES
   bower-rails
   coffee-rails (~> 4.0.0)
+  georuby
   google-api-client
   haml
   httparty

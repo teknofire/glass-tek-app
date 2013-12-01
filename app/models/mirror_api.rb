@@ -14,4 +14,13 @@ class MirrorAPI
   def locations
     self.class.get("/mirror/v1/locations")
   end
+  
+  def parse_respose
+    return false if @response.include?('kind')
+    
+    case @response['kind']
+    when 'mirror#locationsList'
+      LocationList.new(@response['item'])
+    end
+  end
 end

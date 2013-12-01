@@ -1,11 +1,17 @@
 %h2
   Welcome
   
-.panel.panel-warning
-  .panel-body
-    = mirror_api.try(:timeline)
-    = mirror_api.try(:locations)
+#map
+
+:javascript
+  var map = new Map('map')
+  map.fromWKT('#{@locations.latest.wkt}');
+
+- if signed_in?
+  .panel.panel-warning
+    .panel-body
+      = mirror_api.try(:timeline)
+      = mirror_api.try(:locations)
     
-    - if signed_in?
       = current_user.name
       = current_user.attributes.inspect
