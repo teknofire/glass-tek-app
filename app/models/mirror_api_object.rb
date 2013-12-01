@@ -12,6 +12,10 @@ class MirrorApiObject
   base_uri 'www.googleapis.com:443'
   format :json
   
+  def self.debug(enabled = false)
+    @debug = enabled
+  end
+  
   def self.default_path(path = nil)
     @default_path = path unless path.nil?
     
@@ -50,6 +54,8 @@ class MirrorApiObject
     
     options[:query] ||= {}
     options[:query].merge!( content )
+    options[:header] ||= {}
+    options[:header].merge!({ 'Content-Type' => 'application/json' })
     
     @response = post(path, options)
     
@@ -73,7 +79,7 @@ class MirrorApiObject
   protected
   
   def self.valid_response?
-    unauthorized! if @response.unauthorized?
+    unauthorized! if !@debug and @response.unauthorized?
     invalid! if @response.bad_request?
   end
   
@@ -89,7 +95,7 @@ class MirrorApiObject
   def self.authenticate!(user)
     @user ||= user
     
-    raise NoGoogleApiTokenError, @user.token if @user.token.nil?
+    raise NoGoogleApiTokenError, @user.token if !@debug and @user.token.nil?
     
     self.headers( { "Authorization" => "Bearer #{@user.token}" } )
   end
