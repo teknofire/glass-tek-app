@@ -21,7 +21,7 @@ class MirrorAPI
     
     case @response['kind']
     when 'mirror#locationsList'
-      LocationList.new(@response['item'])
+      return LocationList.new(@response)
     else
       raise NotImplementedError, "Unknown response kind #{@response['kind']}"
     end
