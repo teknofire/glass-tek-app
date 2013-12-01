@@ -4,7 +4,10 @@ class WelcomeController < ApplicationController
   end
   
   def hello_self
-    Timeline.create(current_user, 'hello self')
+    response = Timeline.create(current_user, 'hello self')
+    
+    logger.info response.inspect
+    
     flash[:success] = 'Timeline entry sent'
     redirect_to '/'
   rescue NoGoogleApiTokenError => e
