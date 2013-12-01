@@ -57,7 +57,7 @@ class MirrorApiObject
     
     options[:body] = content.to_json
     options[:headers] ||= {}
-    options[:headers].merge!({ 'Content-Type' => 'application/json' })
+    options[:headers].merge!({ 'Content-Type' => 'application/json', "Authorization" => "Bearer #{@user.token}" })
     
     @response = post(path, options)
     
