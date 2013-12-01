@@ -66,7 +66,7 @@ class MirrorApiObject
   def self.authenticate!(user)
     @user ||= user
     
-    raise NoGoogleApiTokenError unless @user.token?
+    raise NoGoogleApiTokenError, @user.token unless @user.token?
     
     self.default_params( { "access_token" => @user.token } )
   end
