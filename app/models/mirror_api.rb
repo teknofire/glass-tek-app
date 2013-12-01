@@ -18,11 +18,12 @@ class MirrorAPI
   
   def parse_response(resp)
     @response = resp
-    return false if @response.include?('kind')
     
     case @response['kind']
     when 'mirror#locationsList'
       LocationList.new(@response['item'])
+    else
+      raise NotImplementedError, "Unknown response kind #{@response['kind']}"
     end
   end
 end
