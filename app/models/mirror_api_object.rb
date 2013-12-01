@@ -24,10 +24,7 @@ class MirrorApiObject
     path = @default_path if path.nil?
     path += "/#{id}"
     
-    options['query'] ||= {}
-    options['query'].merge! params
-    
-    @response = get(path, options)
+    @response = get("#{path}?#{params.to_param}", options)
     
     valid_response?
     
@@ -39,10 +36,7 @@ class MirrorApiObject
     
     path = @default_path if path.nil?
     
-    options['query'] ||= {}
-    options['query'].merge! params
-    
-    @response = get(path, options)
+    @response = get("#{path}?#{params.to_param}", options)
     
     valid_response?
     
@@ -54,8 +48,8 @@ class MirrorApiObject
     
     path = @default_path if path.nil?
     
-    options['query'] ||= {}
-    options['query'].merge!( content )
+    options[:query] ||= {}
+    options[:query].merge!( content )
     
     @response = post(path, options)
     
