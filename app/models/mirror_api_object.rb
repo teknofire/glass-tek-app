@@ -81,7 +81,7 @@ class MirrorApiObject
   protected
   
   def self.valid_response?
-    raise NotAuthenticatedError if !@debug and @response.unauthorized?
+    raise NotAuthenticatedError, error if !@debug and @response.unauthorized?
     raise InvalidRequestError, error if @response.bad_request?
     raise UnknownRequestError, error unless @response.ok?
   end

@@ -16,9 +16,10 @@ class WelcomeController < ApplicationController
   rescue InvalidRequestError => e
     flash[:warning] = "Error performing request, #{e.message}"
     redirect_to '/'
-  rescue NotAuthenticatedError
+  rescue NotAuthenticatedError => e
+    logger.info e.inspect
     flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
-    redirect_to '/login'
+    redirect_to '/'
   rescue UnknownRequestError => e
     flash[:warning] = "Error performing request, #{e.message}"
     redirect_to '/'    
