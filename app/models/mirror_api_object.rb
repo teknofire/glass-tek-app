@@ -7,6 +7,9 @@ end
 class InvalidRequestError < Exception
 end
 
+class UnknownRequestError < Exception
+end
+
 class MirrorApiObject
   include HTTParty
   base_uri 'www.googleapis.com:443'
@@ -79,17 +82,9 @@ class MirrorApiObject
   protected
   
   def self.valid_response?
-    unauthorized! if !@debug and @response.unauthorized?
-    invalid! if @response.bad_request?
-  end
-  
-  def self.invalid!
-    raise InvalidRequestError, error
-  end
-  
-  def self.unauthorized!
-    @user.clear_credentials
-    raise NotAuthenticatedError 
+    raise NotAuthenticatedError if !@debug and @response.unauthorized?
+    raise InvalidRequestError, error if @response.bad_request?
+    raise UnknownRequestError, error unless @response.ok?
   end
   
   def self.authenticate!(user)
