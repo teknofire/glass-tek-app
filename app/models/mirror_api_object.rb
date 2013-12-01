@@ -24,7 +24,10 @@ class MirrorApiObject
     path = @default_path if path.nil?
     path += "/#{id}"
     
-    @response = get("#{path}?#{params.to_param}", options)
+    options['query'] ||= {}
+    options['query'].merge! params
+    
+    @response = get(path, options)
     
     valid_response?
     
@@ -36,7 +39,10 @@ class MirrorApiObject
     
     path = @default_path if path.nil?
     
-    @response = get("#{path}?#{params.to_param}", options)
+    options['query'] ||= {}
+    options['query'].merge! params
+    
+    @response = get(path, options)
     
     valid_response?
     
@@ -47,7 +53,9 @@ class MirrorApiObject
     authenticate!(user)
     
     path = @default_path if path.nil?
-    options.merge!({ query: content })
+    
+    options['query'] ||= {}
+    options['query'].merge!( content )
     
     @response = post(path, options)
     
@@ -57,7 +65,7 @@ class MirrorApiObject
   end
   
   def self.error
-    [@response.code, @response.message, @response.parsed_response['error']['errors'].collect { |e| e['message'] }.join(', ')]
+    [@response.code, @response.message, @response.parsed_response['error']['errors']]
   end
   
   def kind
