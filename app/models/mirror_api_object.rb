@@ -47,7 +47,7 @@ class MirrorApiObject
     authenticate!(user)
     
     path = @default_path if path.nil?
-    options.merge!({ body: content })
+    options.merge!({ query: content })
     
     @response = post(path, options)
     
