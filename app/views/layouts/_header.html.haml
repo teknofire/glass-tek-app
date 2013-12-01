@@ -1,1 +1,10 @@
-%h1 TekApp
+.container
+  %h1 
+    TekApp
+    .pull-right
+      - if signed_in?
+        = link_to '/logout', class: 'btn btn-primary' do
+          Logout
+      - else
+        = link_to '/login', class: 'btn btn-primary' do
+          Login

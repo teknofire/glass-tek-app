@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    !!current_user
+    !current_user.new_record?
   end
 
   helper_method :current_user, :signed_in?, :mirror_api

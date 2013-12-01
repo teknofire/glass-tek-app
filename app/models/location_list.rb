@@ -1,4 +1,7 @@
 class LocationList < MirrorApiObject
+  default_path '/mirror/v1/locations'
+  attr_reader :locations
+  
   def initialize(data)
     # raise NotImplementedError, "Unknown response type" if self.implements?(data['kind'])
     @locations = data['items'].collect do |l|
@@ -10,21 +13,11 @@ class LocationList < MirrorApiObject
     'mirror#locationsList'
   end
   
-  def all
-    @locations
+  def self.find(user, id)
+    Location.find(user, id)
   end
   
-  def latest
-    @locations.select { |l| l.id == 'latest' }.first
-  end
-  
-  def [](key)
-    @locations[key]
-  end
-  
-  def each(&block)
-    @locations.each do |l|
-      yield l
-    end
-  end
+  def self.all(user)
+    LocationList.new(super(user)).locations
+  end  
 end

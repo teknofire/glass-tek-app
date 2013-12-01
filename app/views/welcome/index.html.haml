@@ -1,21 +1,7 @@
-%h2
-  Welcome
+#map
 
-- unless signed_in?
-  = link_to '/login', class: 'btn btn-primary' do
-    Login
-
-- if signed_in?  
-  #map
-
-  :javascript
+:javascript
+  $(document).ready(function() {
     var map = new Map('map')
-    map.fromWKT('#{@locations.latest.wkt}');
-
-  .panel.panel-warning
-    .panel-body
-      = @timeline
-      = @locations.all
-
-      = current_user.name
-      = current_user.attributes.inspect
+    map.fromWKT('#{@location.try(:wkt)}');
+  })

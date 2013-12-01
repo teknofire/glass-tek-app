@@ -1,14 +1,9 @@
-class NotAuthenticatedError < Exception
-end
-
 class MirrorAPI
   include HTTParty
   base_uri 'www.googleapis.com:443'
   
   def initialize(user)
-    @user = user
-    self.class.default_params( { "access_token" => @user.token } )
-    authenticate!
+    authenticate!(user)
   end
   
   def timeline
@@ -38,7 +33,10 @@ class MirrorAPI
   
   protected
   
-  def authenticate!
+  def authenticate!(user)
+    @@user ||= user
+    self.class.default_params( { "access_token" => @@user.token } )
+    
     raise NotAuthenticatedError if self.class.get("/mirror/v1/timeline").unauthorized?
   end
   

@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
       expires_at: hash['credentials']['expires_at']
     })
   end
+  
+  def clear_credentials
+    update_attributes({ token: nil, refresh_token: nil, expires_at: nil })
+  end
 end

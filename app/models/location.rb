@@ -1,8 +1,22 @@
 class Location < MirrorApiObject
+  default_path '/mirror/v1/locations'
+  
   include GeoRuby::SimpleFeatures
   
   def initialize(data)
     @data = data
+  end
+  
+  def self.find(user, id)
+    Location.new super(user, id)
+  end
+  
+  def self.all(user)
+    resp = super(user)
+    
+    resp['items'].collect do |l|
+      Location.new(l)
+    end
   end
   
   def id
