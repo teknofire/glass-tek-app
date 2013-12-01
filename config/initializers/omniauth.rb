@@ -3,8 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"],
     {
       :name => "google",
-      :scope => "userinfo.email, userinfo.profile, https://www.googleapis.com/auth/glass.timeline, https://www.googleapis.com/auth/glass.location,
-    https://www.googleapis.com/auth/userinfo.profile",
+      :scope => "userinfo.email, userinfo.profile, glass.timeline, glass.location",
       :image_aspect_ratio => "square",
       :image_size => 50
     }

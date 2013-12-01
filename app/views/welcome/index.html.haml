@@ -3,6 +3,8 @@
     = link_to '/hello_self', class: 'btn btn-default' do
       Hello self!
   #map.panel-body
+  
+= current_user.attributes
 
 :javascript
   $(document).ready(function() {

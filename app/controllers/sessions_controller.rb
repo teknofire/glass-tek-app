@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     
     # Log the authorizing user in.
     self.current_user = @auth.user
-    
     current_user.update_credentials(auth_hash)
     
     flash[:success] = 'Logged in succesfully'

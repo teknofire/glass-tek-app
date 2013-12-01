@@ -20,6 +20,6 @@ class User < ActiveRecord::Base
   end
   
   def clear_credentials
-    update_attributes({ token: nil, refresh_token: nil, expires_at: nil })
+    # update_attributes({ token: nil, refresh_token: nil, expires_at: nil })
   end
 end
