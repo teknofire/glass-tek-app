@@ -9,7 +9,10 @@ class WelcomeController < ApplicationController
     redirect_to '/'
   rescue NoGoogleApiTokenError => e
     flash[:warning] = "Could not find a valid mirror api token #{e}"
-    redirect_to '/'    
+    redirect_to '/'  
+  rescue NotAuthenticatedError
+    flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
+    redirect_to '/login'      
   end
   
   protected
