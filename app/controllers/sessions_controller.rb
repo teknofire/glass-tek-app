@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   protect_from_forgery :except => [:create, :failure]
   
   def create
+    signout if signed_in?
     unless @auth = Authorization.find_from_hash(auth_hash)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
@@ -18,9 +19,8 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    flash[:success] = 'You have been logged out'
-    session[:user_id] = nil
-    
+    signout
+    flash[:success] = 'You have been logged out'    
     redirect_back_or_default('/')
   end
   
@@ -31,6 +31,10 @@ class SessionsController < ApplicationController
 
   protected
 
+  def signout
+    session[:user_id] = nil
+  end
+  
   def auth_hash
     request.env['omniauth.auth']
   end
