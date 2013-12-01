@@ -54,8 +54,8 @@ class MirrorApiObject
     
     options[:body] ||= {}
     options[:body].merge!( content )
-    options[:header] ||= {}
-    options[:header].merge!({ 'Content-Type' => 'application/json' })
+    options[:headers] ||= {}
+    options[:headers].merge!({ 'Content-Type' => 'application/json' })
     
     @response = post(path, options)
     
