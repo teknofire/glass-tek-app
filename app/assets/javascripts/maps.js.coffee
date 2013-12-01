@@ -7,7 +7,7 @@ class @Map
     @map = L.map(@selector).setView([65, -155], 5)
     
     L.tileLayer('http://tiles.gina.alaska.edu/tilesrv/bdl/tile/{x}/{y}/{z}', {
-      maxZoom: 15
+      maxZoom: 20
     }).addTo(@map);
     
     @map.whenReady(when_ready_func, @) if when_ready_func?           
