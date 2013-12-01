@@ -1,6 +1,8 @@
 class LocationList < MirrorApiObject
   def initialize(data)
     # raise NotImplementedError, "Unknown response type" if self.implements?(data['kind'])
+    logger.info data.inspect
+    
     @locations = data['items'].collect do |l|
       Location.new(l)
     end
