@@ -97,6 +97,6 @@ class MirrorApiObject
     
     raise NoGoogleApiTokenError, @user.token if @user.token.nil?
     
-    self.default_params( { "access_token" => @user.token } )
+    self.headers( { "Authorization" => "Bearer #{@user.token}" } )
   end
 end
