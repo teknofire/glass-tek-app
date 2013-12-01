@@ -16,8 +16,14 @@ class MirrorAPI
     
   end
   
+  def error
+    [@response.code, @response.message, @response.parsed_response['error']['errors']]
+  end
+  
   def parse_response(resp)
     @response = resp
+    
+    return false unless @response.ok?
     
     case @response['kind']
     when 'mirror#locationsList'

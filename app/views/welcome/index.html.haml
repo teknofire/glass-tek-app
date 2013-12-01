@@ -11,7 +11,7 @@
   .panel.panel-warning
     .panel-body
       = mirror_api.try(:timeline)
-      = mirror_api.try(:locations)
-    
+      / = mirror_api.try(:locations)
+
       = current_user.name
       = current_user.attributes.inspect

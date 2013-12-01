@@ -6,17 +6,15 @@ class ApplicationController < ActionController::Base
   protected
   
   def mirror_api
-    if signed_in? and current_user.token?
-      @mirror_api = MirrorAPI.new(current_user)
-    else
-      @mirror_api = nil
-    end
-    
-    @mirror_api
+    @mirror_api ||= MirrorAPI.new(current_user)
   end
   
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
+    
+    @current_user ||= User.new(name: 'Guest')
+    
+    @current_user
   end
 
   def signed_in?
