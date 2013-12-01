@@ -57,7 +57,7 @@ class MirrorApiObject
   end
   
   def self.error
-    [@response.code, @response.message, @response.parsed_response['error']['errors'].collect { |e| e.message }.join(', ')]
+    [@response.code, @response.message, @response.parsed_response['error']['errors'].collect { |e| e['message'] }.join(', ')]
   end
   
   def kind
