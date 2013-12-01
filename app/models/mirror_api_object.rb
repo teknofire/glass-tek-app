@@ -68,6 +68,6 @@ class MirrorApiObject
     
     raise NoGoogleApiTokenError unless @user.token?
     
-    self.class.default_params( { "access_token" => @user.token } )
+    self.default_params( { "access_token" => @user.token } )
   end
 end
