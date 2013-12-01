@@ -7,6 +7,7 @@ end
 class MirrorApiObject
   include HTTParty
   base_uri 'www.googleapis.com:443'
+  format :json
   
   def self.default_path(path = nil)
     @default_path = path unless path.nil?
@@ -33,6 +34,19 @@ class MirrorApiObject
     path = @default_path if path.nil?
     
     @response = get("#{path}?#{params.to_param}", options)
+    
+    authorized?
+    
+    @response
+  end
+  
+  def self.create(user, content, path=nil, options={})
+    authenticate!(user)
+    
+    path = @default_path if path.nil?
+    options.merge!({ body: content })
+    
+    @response = post(path, options)
     
     authorized?
     

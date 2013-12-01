@@ -3,6 +3,15 @@ class WelcomeController < ApplicationController
     fetch_mirror_api_info if signed_in?
   end
   
+  def hello_self
+    Timeline.create(current_user, 'hello self')
+    flash[:success] = 'Timeline entry sent'
+    redirect_to '/'
+  rescue NoGoogleApiTokenError => e
+    flash[:warning] = "Could not find a valid mirror api token #{e}"
+    redirect_to '/'    
+  end
+  
   protected
   
   def fetch_mirror_api_info

@@ -1,7 +1,14 @@
-#map
+.panel.panel-default
+  .panel-heading
+    = link_to '/hello_self', class: 'btn btn-default' do
+      Hello self!
+  #map.panel-body
 
 :javascript
   $(document).ready(function() {
     var map = new Map('map')
-    map.fromWKT('#{@location.try(:wkt)}');
+    var wkt = '#{@location.try(:wkt)}';
+    if (wkt.length > 0) {
+      map.fromWKT(wkt);
+    }
   })
