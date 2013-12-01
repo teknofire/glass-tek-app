@@ -21,4 +21,5 @@ class @Map
       # this is needed to handle issue with zooming to soon after initialization
       setTimeout =>
         @map.panTo(object.getLatLng())
+        @map.setZoom(14)
       , 100
