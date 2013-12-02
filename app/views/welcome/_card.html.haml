@@ -1,5 +1,5 @@
 %tr
-  %td= card['id']
-  %td= card['text']
+  %td= card.id
+  %td= card.text
   %td
-    = link_to 'Remote link', card['selfLink'], class: 'btn btn-default'
+    = link_to 'Remote link', card.self_link, class: 'btn btn-default'

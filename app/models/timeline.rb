@@ -7,11 +7,26 @@ class Timeline < MirrorApiObject
     @data = data
   end
   
+  def id
+    @data['id']
+  end
+  
+  def self_link
+    @data['selfLink']
+  end
+  
+  def text
+    @data['text']
+  end
+  
   def self.create(user, text)
     super(user, { text: text, notification: { level: 'DEFAULT' }, menuItems: [{ action: 'READ_ALOUD' }, { action: 'DELETE' }] })
   end
   
   def self.all(user)
-    super(user)
+    resp = super(user)
+    resp['items'].collect do |l|
+      Timeline.new(l)
+    end
   end
 end
