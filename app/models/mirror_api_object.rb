@@ -87,8 +87,9 @@ class MirrorApiObject
       client_secret: ENV['GOOGLE_SECRET'], 
       grant_type: 'refresh_token' 
     }
-    
-    resp = post("https://accounts.google.com/o/oauth2/token?#{opts.to_param}")
+    url = "https://accounts.google.com/o/oauth2/token?#{opts.to_param}"
+    Rails.logger.info url
+    resp = post(url)
     
     if resp.ok?
       @user.update_credentials({ token: resp.access_token, expires_at: resp.expires_in })

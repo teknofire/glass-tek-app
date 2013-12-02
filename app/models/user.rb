@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :notifications
   
   def self.create_from_hash!(hash)
-    create(
+    create!(
       name: hash['info']['name'], 
       email: hash['info']['email'], 
       token: hash['credentials']['token'], 
