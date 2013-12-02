@@ -78,6 +78,23 @@ class MirrorApiObject
     self.kind == kynd
   end
   
+  def refresh_token
+    opts = { 
+      refresh_token: @user.refresh_token, 
+      client_id: ENV['GOOGLE_KEY'], 
+      client_secret: ENV['GOOGLE_SECRET'], 
+      grant_type: 'refresh_token' 
+    }
+    
+    resp = post("https://accounts.google.com/o/oauth2/token?#{opts.to_param}")
+    
+    if resp.ok?
+      @user.update_credentials({ token: resp.access_token, expires_at: resp.expires_in })
+    else
+      raise NotAuthenticatedError, 'unable to refresh credentials'
+    end
+  end
+  
   protected
   
   def self.valid_response?
