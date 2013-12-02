@@ -98,7 +98,7 @@ class MirrorApiObject
   end
   
   def self.valid_response?
-    refresh_token! if !@debug and @response.unauthorized?
+    refresh_token! if @response.unauthorized?
     raise InvalidRequestError, error if @response.bad_request?
     raise UnknownRequestError, error unless @response.ok?
   end
@@ -106,7 +106,7 @@ class MirrorApiObject
   def self.authenticate!(user)
     @user ||= user
     
-    raise NoGoogleApiTokenError, @user.token if !@debug and @user.token.nil?
+    raise NoGoogleApiTokenError, @user.token if @user.token.nil?
     
     self.headers( { "Authorization" => "Bearer #{@user.token}" } )
   end
