@@ -5,7 +5,13 @@
   #map.panel-body
   
 = current_user.attributes
-= @timeline
+
+- unless @timeline.nil?
+  %table.table
+    %legend Timeline
+    %tbody
+      - @timeline.each do |card|
+        = render 'card', card: card
 
 :javascript
   $(document).ready(function() {
