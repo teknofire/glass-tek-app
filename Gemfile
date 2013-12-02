@@ -53,6 +53,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 #heroku stuff
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 ruby '2.0.0'
 

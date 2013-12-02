@@ -12,7 +12,12 @@ class SessionsController < ApplicationController
     # Log the authorizing user in.
     self.current_user = @auth.user
     
-    flash[:success] = 'Logged in succesfully'
+    if current_user.id
+      flash[:success] = 'Logged in succesfully'
+    else
+      flash[:danger] = "Unable to create user, #{@auth.errors.full_messages}, #{@auth.user.errors.full_messages}"
+    end
+    
     redirect_back_or_default('/')
   end
   

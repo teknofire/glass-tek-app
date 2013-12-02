@@ -1,5 +1,6 @@
 class Authorization < ActiveRecord::Base
   belongs_to :user
+  
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
   
@@ -8,7 +9,12 @@ class Authorization < ActiveRecord::Base
   end
 
   def self.create_from_hash(hash, user = nil)
-    user ||= User.create_from_hash!(hash)
+    if user.nil?
+      user = User.create_from_hash!(hash)
+    else
+      user.update_from_hash!(hash)
+    end
+    
     Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'])
   end
 end
