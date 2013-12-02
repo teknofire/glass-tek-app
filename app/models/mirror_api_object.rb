@@ -77,8 +77,10 @@ class MirrorApiObject
   def implements?(kynd)
     self.kind == kynd
   end
+
+  protected  
   
-  def refresh_token
+  def self.refresh_token!
     opts = { 
       refresh_token: @user.refresh_token, 
       client_id: ENV['GOOGLE_KEY'], 
@@ -95,10 +97,8 @@ class MirrorApiObject
     end
   end
   
-  protected
-  
   def self.valid_response?
-    raise NotAuthenticatedError, error if !@debug and @response.unauthorized?
+    refresh_token! if !@debug and @response.unauthorized?
     raise InvalidRequestError, error if @response.bad_request?
     raise UnknownRequestError, error unless @response.ok?
   end
