@@ -3,22 +3,8 @@
     = link_to '/hello_self', class: 'btn btn-default' do
       Hello self!
   #map.panel-body
-  
-= current_user.attributes
 
-- unless @timeline.nil?
-  %table.table
-    %legend Timeline
-    %thead
-      %tr
-        %th ID
-        %th Text
-        %th Created at
-        %th Updated at
-        %th Actions
-    %tbody
-      - @timeline.each do |card|
-        = render 'card', card: card
+= render 'timeline', timeline: @timeline
 
 :javascript
   $(document).ready(function() {
