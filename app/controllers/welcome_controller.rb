@@ -32,8 +32,8 @@ class WelcomeController < ApplicationController
     @timeline = Timeline.all(current_user)
   rescue NoGoogleApiTokenError => e
     flash[:warning] = "Could not find a valid mirror api token #{e.message}"    
-  rescue NotAuthenticatedError
-    flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
+  rescue NotAuthenticatedError =>e
+    flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire! #{e.message}"
   rescue UnknownRequestError => e
     flash[:warning] = "Error performing request, #{e.message}"
   rescue InvalidRequestError => e

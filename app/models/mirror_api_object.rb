@@ -88,7 +88,6 @@ class MirrorApiObject
       grant_type: 'refresh_token' 
     }
     url = "https://accounts.google.com/o/oauth2/token?#{opts.to_param}"
-    Rails.logger.info url
     resp = post(url)
     
     if resp.ok?
