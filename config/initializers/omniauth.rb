@@ -7,6 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       image_aspect_ratio: "square",
       image_size: 50,
       access_type: 'offline',
-      approval_prompt: 'force'
+      approval_prompt: 'force',
+      prompt: 'consent'
     }
 end
