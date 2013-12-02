@@ -1,0 +1,21 @@
+%dl.dl-horizontal
+  %dt Name
+  %dd= @notification.name
+  %dt Message
+  %dd= @notification.message
+  %dt Key
+  %dd= @notification.key
+  
+.panel.panel-info
+  .panel-heading
+    Notification instructions
+  .panel-body
+    %dl
+      %dt Url for to use for notifcation: 
+      %dd
+        [POST]
+        = push_notification_url(@notification)
+      %dt &nbsp;
+      %dd
+        = link_to 'Test', push_notification_url(@notification), method: :post, class: 'btn btn-default'
+= link_to 'Back', notifications_path, class: 'btn btn-default'

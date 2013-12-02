@@ -1,4 +1,10 @@
 TekApp::Application.routes.draw do
+  resources :notifications do
+    member do
+      post 'push'
+    end
+  end
+
   resources :users
 
   resources :sessions

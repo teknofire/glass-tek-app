@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def login_required!
+    unless signed_in?
+      flash[:warning] = "You must be logged in to view this page"
+      redirect_to '/'
+    end
+  end
+  
   def mirror_api
     @mirror_api ||= MirrorAPI.new(current_user)
   end

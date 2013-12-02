@@ -1,0 +1,9 @@
+%tr
+  %td= notification.name
+  %td= notification.message
+  %td
+    .btn-group
+      = link_to 'View', notification, class: 'btn btn-default'
+      = link_to 'Edit', edit_notification_path(notification), class: 'btn btn-default'
+      = link_to 'Destroy', notification_path(notification), method: :delete, prompt: 'Are you sure?', class: 'btn btn-danger'
+    

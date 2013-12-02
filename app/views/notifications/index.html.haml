@@ -1,0 +1,12 @@
+%table.table
+  %legend 
+    Notifications
+    .pull-right
+      = link_to 'New Notification', new_notification_path, class: 'btn btn-success'
+  %thead
+    %tr
+      %th Name
+      %th Message
+      %th Actions
+  %tbody
+    = render @notifications
