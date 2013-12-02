@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   end
   
   def push
-    @notification = current_user.notifications.from_param(params[:id])
+    @notification = Notification.from_param(params[:id])
     resp = Timeline.create(@notification.user, @notification.message)
     
     respond_to do |format|
