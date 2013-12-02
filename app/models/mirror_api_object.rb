@@ -93,7 +93,7 @@ class MirrorApiObject
     if resp.ok?
       @user.update_credentials({ token: resp.access_token, expires_at: resp.expires_in })
     else
-      raise NotAuthenticatedError, 'unable to refresh credentials'
+      raise NotAuthenticatedError, ['unable to refresh credentials', error]
     end
   end
   
