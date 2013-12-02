@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   protect_from_forgery :except => [:push]
   
-  before_filter :login_required!, except: [:send]
+  before_filter :login_required!, except: [:push]
   
   def index
     @notifications = Notification.where(user_id: current_user.id)
