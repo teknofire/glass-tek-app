@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  protect_from_forgery :except => [:push]
+  
   before_filter :login_required!, except: [:send]
   
   def index
