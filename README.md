@@ -14,3 +14,4 @@ The following env variables need to be set
   * GOOGLE_KEY
   * GOOGLE_SECRET
 
+Test
