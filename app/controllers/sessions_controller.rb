@@ -3,7 +3,10 @@ class SessionsController < ApplicationController
   
   def create
     signout
-    unless @auth = Authorization.find_from_hash(auth_hash)
+    if @auth = Authorization.find_from_hash(auth_hash)
+      # Update a user with any new identify information
+      @auth.user.update_from_hash!(auth_hash)
+    else
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
       @auth = Authorization.create_from_hash(auth_hash, current_user)
