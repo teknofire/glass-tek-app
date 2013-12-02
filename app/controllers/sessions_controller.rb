@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   protect_from_forgery :except => [:create, :failure]
   
   def create
-    signout if signed_in?
+    signout
     unless @auth = Authorization.find_from_hash(auth_hash)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
