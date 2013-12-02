@@ -34,6 +34,6 @@ class WelcomeController < ApplicationController
     flash[:warning] = "Could not find a valid mirror api token #{e.message}"    
   rescue NotAuthenticatedError
     flash[:danger] = "Your access to the mirror api is not authorized or has expired, attempting to reaquire!"
-    redirect_to '/login'
+    redirect_to '/'
   end
 end
