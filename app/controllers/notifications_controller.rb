@@ -22,6 +22,9 @@ class NotificationsController < ApplicationController
       format.json {
         render json: { success: resp.ok? }
       }
+      format.xml {
+        render xml: { success: resp.ok? }
+      }
     end
   rescue NoGoogleApiTokenError => e
     flash[:warning] = "Could not find a valid mirror api token #{e}"
