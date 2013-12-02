@@ -6,8 +6,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       scope: "userinfo.email, userinfo.profile, glass.timeline, glass.location",
       image_aspect_ratio: "square",
       image_size: 50,
-      access_type: 'offline',
-      approval_prompt: 'force',
       prompt: 'consent'
     }
 end

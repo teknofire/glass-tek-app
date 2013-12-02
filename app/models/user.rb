@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   protected
   
   def params_from_hash(hash)
+    Rails.logger.info hash.inspect
+    
     {
       name: hash['info']['name'], 
       email: hash['info']['email'], 
