@@ -28,8 +28,8 @@ class WelcomeController < ApplicationController
   protected
   
   def fetch_mirror_api_info
-    # @timeline = mirror_api.timeline
     @location = Location.find(current_user, 'latest')
+    @timeline = Timeline.all(current_user)
   rescue NoGoogleApiTokenError => e
     flash[:warning] = "Could not find a valid mirror api token #{e.message}"    
   rescue NotAuthenticatedError
