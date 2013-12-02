@@ -15,6 +15,14 @@ class Timeline < MirrorApiObject
     @data['selfLink']
   end
   
+  def created_at
+    DateTime.parse(@data['created'])
+  end
+  
+  def updated_at
+    DateTime.parse(@data['updated'])
+  end
+  
   def text
     @data['text']
   end

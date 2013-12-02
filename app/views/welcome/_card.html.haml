@@ -1,5 +1,7 @@
 %tr
   %td= card.id
   %td= card.text
+  %td= card.created_at
+  %td= card.updated_at
   %td
     = link_to 'Remote link', card.self_link, class: 'btn btn-default'
