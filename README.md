@@ -1,3 +1,10 @@
+Requirements
+============
+
+* Ruby 2.0.0
+* Rails 4.0.1
+* Postgresql 9.2
+
 Configuration
 =============
 
