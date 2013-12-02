@@ -3,6 +3,12 @@
     TekApp
     .pull-right
       - if signed_in?
+        = link_to root_path, class: 'btn btn-primary' do
+          Home
+      
+        = link_to notifications_path, class: 'btn btn-primary' do
+          Notifications
+          
         = link_to '/logout', class: 'btn btn-primary' do
           Logout
       - else
