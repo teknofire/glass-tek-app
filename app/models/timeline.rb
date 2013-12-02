@@ -8,6 +8,6 @@ class Timeline < MirrorApiObject
   end
   
   def self.create(user, text)
-    super(user, { text: text, notification: { level: 'DEFAULT' } })
+    super(user, { text: text, notification: { level: 'DEFAULT' }, menuItems: %w{ READ_ALOUD DELETE } })
   end
 end
