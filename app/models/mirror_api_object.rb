@@ -87,7 +87,7 @@ class MirrorApiObject
       client_secret: ENV['GOOGLE_SECRET'], 
       grant_type: 'refresh_token' 
     }
-    url = "https://accounts.google.com/o/oauth2/token?#{opts.to_param}"
+    url = "https://accounts.google.com:443/o/oauth2/token?#{opts.to_param}"
     resp = post(url)
     
     if resp.ok?
